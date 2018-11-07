@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "Roles")
 public class Roles {
 
-    public Roles(){};
+    public Roles(){}
 
 
     @Id

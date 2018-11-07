@@ -10,9 +10,9 @@ import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
 import com.example.ServiceInterface.StorageService;
-import com.example.StorageException;
-import com.example.StorageFileNotFoundException;
-import com.example.StorageProperties;
+import com.example.Exceptions.StorageException;
+import com.example.Exceptions.StorageFileNotFoundException;
+import com.example.CONFIGs.StorageProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -106,3 +106,16 @@ public class FileSystemStorageService implements StorageService {
         }
     }
 }
+
+/*
+    String fileExtentions = ".exe,.dmg,.mp3,.jar";
+    fileName = multipartFile.getOriginalFilename();
+    int lastIndex = fileName.lastIndexOf('.');
+    String substring = fileName.substring(lastIndex, fileName.length());
+
+    if (!fileExtentions.contains(substring))
+    //logic
+else
+    //logic
+
+    */

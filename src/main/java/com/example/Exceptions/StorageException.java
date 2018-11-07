@@ -1,4 +1,4 @@
-package com.example;
+package com.example.Exceptions;
 
 public class StorageException extends RuntimeException {
 

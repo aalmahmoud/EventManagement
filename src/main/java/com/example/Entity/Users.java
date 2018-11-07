@@ -21,7 +21,7 @@ public class Users {
     private long userid;
 
     @NotNull
-    @Size(min = 2,max = 40, message = "What the hell are you doing")
+    @Size(min = 2,max = 40)
     private String username;
 
     @NotBlank

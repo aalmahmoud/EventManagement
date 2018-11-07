@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.CONFIGs.StorageProperties;
 import com.example.ServiceInterface.StorageService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

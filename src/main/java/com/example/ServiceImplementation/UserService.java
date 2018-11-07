@@ -1,10 +1,12 @@
 package com.example.ServiceImplementation;
 
+import com.example.DTOs.UserDTO;
 import com.example.Entity.Roles;
 import com.example.Entity.Users;
 import com.example.Repository.RolesRepository;
 import com.example.Repository.UserRepository;
 import com.example.ServiceInterface.UsersInterface;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -17,27 +19,39 @@ import java.util.Optional;
 public class UserService implements UsersInterface {
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private RolesRepository rolesRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
 
     @Autowired
     private NotificationService notificationService;
 
     @Override
-    public void AddUser(Users usr,Long id) {
-        usr.setRolesid(rolesRepository.findById(id).get());
-        userRepository.save(usr);
-        notificationService.sendNotificaitoin(usr.getUseremail(),"Event Management CO.",  "Welcome to our website \uD83D\uDE0A : "+ usr.getUsername());
+    public Users AddUser(UserDTO userDTO, Long id) {
+
+        Users users = new Users();
+        users= modelMapper.map(userDTO,Users.class);
+
+        users.setRolesid(rolesRepository.findById(id).get());
+        notificationService.sendNotificaitoin(users.getUseremail(),"Event Management CO.",  "Welcome to our website \uD83D\uDE0A : "+ users.getUsername());
+         return userRepository.save(users);
     }
 
     @Override
-    public void UpdateUser(Users uusr,Long rid) {
-        /*  need coding here*/
-        uusr.setRolesid(rolesRepository.findById(rid).get());
-        uusr.getUserid();
+    public void UpdateUser(UserDTO userDTO,Long uid) {
 
-        userRepository.save(uusr);
+        Users users1 = userRepository.findById(uid).get();
+        Users users = modelMapper.map(userDTO,Users.class);
+
+     //   if (userRepository.findById(uid).isPresent()){
+        users.setUserid(uid);
+        users.setRolesid(users1.getRolesid());
+        userRepository.save(users);
     }
+
 
     public Iterable<Users> findAll() {
     return userRepository.findAll();
@@ -53,7 +67,5 @@ public class UserService implements UsersInterface {
     userRepository.save(duser);
 
     }
-
-
 
 }

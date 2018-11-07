@@ -1,4 +1,4 @@
-package com.example;
+package com.example.CONFIGs;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
