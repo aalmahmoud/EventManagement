@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "Ticket")
 public class Ticket {
 
-    public Ticket(){};
+    public Ticket(){}
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,10 +23,10 @@ public class Ticket {
     @JoinColumn(name = "attenderid")
     private Users attenderid;
 
-    @ColumnDefault("0")
+    @ColumnDefault(value = "0")
     private  boolean cancelled ;
 
-    @ColumnDefault("0")
+    @ColumnDefault(value = "0")
     private boolean attended;
 
     public long getTicketid() {

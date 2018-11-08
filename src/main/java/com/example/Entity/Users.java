@@ -39,7 +39,7 @@ public class Users {
     @JoinColumn(name="rolesid")
     private Roles rolesid;
 
-    @ColumnDefault("0")
+    @ColumnDefault(value = "0")
     private  boolean deleted;
 
     @Size( max = 30)

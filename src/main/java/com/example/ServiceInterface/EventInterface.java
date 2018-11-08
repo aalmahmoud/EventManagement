@@ -1,5 +1,6 @@
 package com.example.ServiceInterface;
 
+import com.example.DTOs.EventDTO;
 import com.example.Entity.Event;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.Optional;
 public interface EventInterface {
     Iterable<Event> findAll();
     Optional<Event> findById(Long id);
-    void AddEvent(Event evn , Long id);
+    void AddEvent(EventDTO eventDTO, Long id);
     void DeleteEvent(Long id);
     void UpdateEvent(Event uevn);
     List<Event> ViewApprovedEvents();

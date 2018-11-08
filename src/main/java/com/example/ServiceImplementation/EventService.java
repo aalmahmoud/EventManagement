@@ -1,8 +1,10 @@
 package com.example.ServiceImplementation;
+import com.example.DTOs.EventDTO;
 import com.example.Entity.Event;
 import com.example.Repository.EventRepository;
 import com.example.Repository.UserRepository;
 import com.example.ServiceInterface.EventInterface;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
@@ -15,15 +17,25 @@ public class EventService implements EventInterface {
 
     @Autowired
     private EventRepository eventRepository;
+
     @Autowired
     private UserRepository userRepository;
-    @Override
-    public void AddEvent(Event evn,Long id) {
-        LocalDate date = LocalDate.now().minusDays(1);
-        if (date.isBefore(evn.getEventdate())){
 
-        evn.setOrganizerid(userRepository.findById(id).get());
-        eventRepository.save(evn);}
+    @Autowired
+    private ModelMapper modelMapper;
+
+
+    @Override
+    public void AddEvent(EventDTO eventDTO, Long id) {
+
+        Event event = new Event();
+        event= modelMapper.map(eventDTO,Event.class);
+
+        LocalDate date = LocalDate.now().minusDays(1);
+        if (date.isBefore(event.getEventdate())){
+
+        event.setOrganizerid(userRepository.findById(id).get());
+        eventRepository.save(event);}
     }
 
     public Iterable<Event> findAll() {
