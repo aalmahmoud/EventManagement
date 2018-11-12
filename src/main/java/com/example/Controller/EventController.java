@@ -1,8 +1,10 @@
 package com.example.Controller;
 
+import com.example.DTOs.EventDTO;
 import com.example.Entity.Event;
 import com.example.ServiceInterface.EventInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
@@ -24,17 +26,18 @@ public class EventController {
     public Optional<Event> findByIdd(@PathVariable Long id){return eventInterface.findById(id);}
 
     @PostMapping (value = "/AddEvents/{id}")
-    public void AddEvent(@Valid @RequestBody Event evn, @PathVariable Long id) {/*BindingResult bindingResult)*/
+    public ResponseEntity AddEvent(@Valid @RequestBody EventDTO eventDTO, @PathVariable Long id ,BindingResult bindingResult){
 
-       // if (bindingResult.hasErrors()){
-            // need coding here
-     //   }
+        if (bindingResult.hasErrors()){
+            return ResponseEntity.badRequest().body(bindingResult.getAllErrors());
+        }
 
-        eventInterface.AddEvent(evn,id);
+        return  ResponseEntity.ok(eventInterface.AddEvent(eventDTO,id));
     }
 
-    @PutMapping (value = "/UpdateEvent")
-    public void UpdateEvent (@RequestBody Event uevn){eventInterface.UpdateEvent(uevn);}
+    @PutMapping (value = "/UpdateEvent/{id}")
+    public void UpdateEvent (@Valid @RequestBody EventDTO eventDTO, @PathVariable Long id){
+        eventInterface.UpdateEvent(eventDTO,id);}
 
     @PutMapping (value = "/DeleteEvent/{id}")
     public  void DeleteEvent (@PathVariable Long id){eventInterface.DeleteEvent(id);}

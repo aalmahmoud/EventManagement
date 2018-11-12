@@ -1,9 +1,11 @@
 package com.example.ServiceImplementation;
 import com.example.DTOs.EventDTO;
 import com.example.Entity.Event;
+import com.example.Entity.Users;
 import com.example.Repository.EventRepository;
 import com.example.Repository.UserRepository;
 import com.example.ServiceInterface.EventInterface;
+import javassist.tools.web.BadHttpRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +28,7 @@ public class EventService implements EventInterface {
 
 
     @Override
-    public void AddEvent(EventDTO eventDTO, Long id) {
+    public Event AddEvent(EventDTO eventDTO, Long id) {
 
         Event event = new Event();
         event= modelMapper.map(eventDTO,Event.class);
@@ -35,7 +37,9 @@ public class EventService implements EventInterface {
         if (date.isBefore(event.getEventdate())){
 
         event.setOrganizerid(userRepository.findById(id).get());
-        eventRepository.save(event);}
+            return eventRepository.save(event);
+       }
+       return event;
     }
 
     public Iterable<Event> findAll() {
@@ -54,8 +58,15 @@ public class EventService implements EventInterface {
     }
 
     @Override
-    public void UpdateEvent(Event uevn) {
-        eventRepository.save(uevn);
+    public void UpdateEvent(EventDTO eventDTO, Long id) {
+
+        Event event1= eventRepository.findById(id).get();
+        Event event= modelMapper.map(eventDTO,Event.class);
+
+        event.setEventid(id);
+        event.setOrganizerid(event1.getOrganizerid());
+
+        eventRepository.save(event);
     }
 
     @Override

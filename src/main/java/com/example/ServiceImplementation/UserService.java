@@ -36,7 +36,7 @@ public class UserService implements UsersInterface {
         users= modelMapper.map(userDTO,Users.class);
 
         users.setRolesid(rolesRepository.findById(id).get());
-        notificationService.sendNotificaitoin(users.getUseremail(),"Event Management CO.",  "Welcome to our website \uD83D\uDE0A : "+ users.getUsername());
+        //notificationService.sendNotificaitoin(users.getUseremail(),"Event Management CO.",  "Welcome to our website \uD83D\uDE0A : "+ users.getUsername());
          return userRepository.save(users);
     }
 

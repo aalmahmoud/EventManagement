@@ -12,9 +12,9 @@ import java.util.Optional;
 public interface EventInterface {
     Iterable<Event> findAll();
     Optional<Event> findById(Long id);
-    void AddEvent(EventDTO eventDTO, Long id);
+    Event AddEvent(EventDTO eventDTO, Long id);
     void DeleteEvent(Long id);
-    void UpdateEvent(Event uevn);
+    void UpdateEvent(EventDTO eventDTO,Long id);
     List<Event> ViewApprovedEvents();
     void ApproveEvent(Long id);
 
