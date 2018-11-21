@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class Users {
 
     public Users() {
-    };
+    }
 
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,11 +36,11 @@ public class Users {
     private LocalDate userdob;
 
     @ManyToOne
-    @JoinColumn(name="rolesid")
-    private Roles rolesid;
+    @JoinColumn(referencedColumnName = "rolesname",name="rolesname")
+    private Roles rolesname;
 
-    @ColumnDefault(value = "0")
-    private  boolean deleted;
+
+private  boolean enabled=true;
 
     @Size( max = 30)
     private String usercity;
@@ -77,20 +77,20 @@ public class Users {
         this.useremail = useremail;
     }
 
-    public Roles getRolesid() {
-        return rolesid;
+    public Roles getRolesname() {
+        return rolesname;
     }
 
-    public void setRolesid(Roles rolesid) {
-        this.rolesid = rolesid;
+    public void setRolesname(Roles rolesname) {
+        this.rolesname = rolesname;
     }
 
-    public boolean isDeleted() {
-        return deleted;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getUsercity() {

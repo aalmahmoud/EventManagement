@@ -11,7 +11,7 @@ public interface UsersInterface {
     Iterable<Users> findAll();
     Optional<Users> findById(Long id);
     void DeleteUser(Long id);
-    Users  AddUser(UserDTO userDTO,Long id);
+    Users  AddUser(UserDTO userDTO,String name);
      void UpdateUser(UserDTO userDTO, Long uid);
 
 }

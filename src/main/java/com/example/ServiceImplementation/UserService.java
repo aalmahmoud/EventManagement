@@ -30,12 +30,12 @@ public class UserService implements UsersInterface {
     private NotificationService notificationService;
 
     @Override
-    public Users AddUser(UserDTO userDTO, Long id) {
+    public Users AddUser(UserDTO userDTO, String name) {
 
         Users users = new Users();
         users= modelMapper.map(userDTO,Users.class);
 
-        users.setRolesid(rolesRepository.findById(id).get());
+        users.setRolesname(rolesRepository.findById(name).get());
         //notificationService.sendNotificaitoin(users.getUseremail(),"Event Management CO.",  "Welcome to our website \uD83D\uDE0A : "+ users.getUsername());
          return userRepository.save(users);
     }
@@ -46,11 +46,11 @@ public class UserService implements UsersInterface {
         Users users1 = userRepository.findById(uid).get();
         Users users = modelMapper.map(userDTO,Users.class);
 
-     //   if (userRepository.findById(uid).isPresent()){
+        if (userRepository.findById(uid).isPresent()){
         users.setUserid(uid);
-        users.setRolesid(users1.getRolesid());
+        users.setRolesname(users1.getRolesname());
         userRepository.save(users);
-    }
+    }}
 
 
     public Iterable<Users> findAll() {
@@ -63,7 +63,7 @@ public class UserService implements UsersInterface {
     @Override
     public void DeleteUser(Long id) {
     Users duser = userRepository.findById(id).get();
-    duser.setDeleted(true);
+    duser.setEnabled(false);
     userRepository.save(duser);
 
     }

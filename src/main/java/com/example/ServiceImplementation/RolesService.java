@@ -20,8 +20,13 @@ public class RolesService implements RolesInterface {
         return  rolesRepository.findAll();
     }
 
-    public Optional<Roles> findById(Long id) {
-        return rolesRepository.findById(id);
+  //  public Optional<Roles> findById(Long id) {
+    //    return rolesRepository.findById(id);
+   // }
+
+    @Override
+    public Optional<Roles> findByRolesname(String name) {
+        return rolesRepository.findById(name);
     }
 
     @Override
