@@ -52,6 +52,20 @@ public class UserService implements UsersInterface {
         userRepository.save(users);
     }}
 
+    @Override
+    public UserDTO findByUserName(String a)
+    {
+       Users users =  userRepository.findByUsername(a);
+        UserDTO users1 = modelMapper.map(users,UserDTO.class);
+        return users1;
+    }
+
+    @Override
+    public Roles findByRolesName(String b) {
+       return rolesRepository.findById(userRepository.findByUsername(b).getRolesname().getRolesname()).get();
+
+    }
+
 
     public Iterable<Users> findAll() {
     return userRepository.findAll();

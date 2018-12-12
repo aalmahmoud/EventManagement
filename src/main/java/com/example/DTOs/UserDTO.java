@@ -2,6 +2,9 @@ package com.example.DTOs;
 
 import com.example.Entity.Roles;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,6 +13,10 @@ import java.time.LocalDate;
 
 public class UserDTO {
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    private long userid;
+
     @NotNull
     @Size(min = 2,max = 40)
     private String username;
@@ -17,6 +24,7 @@ public class UserDTO {
     @NotBlank
     @NotNull
     private String userpassword;
+
 
     @Email
     @NotNull
@@ -76,5 +84,13 @@ public class UserDTO {
 
     public void setUsercity(String usercity) {
         this.usercity = usercity;
+    }
+
+    public long getUserid() {
+        return userid;
+    }
+
+    public void setUserid(long userid) {
+        this.userid = userid;
     }
 }
